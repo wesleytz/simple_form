@@ -232,4 +232,12 @@ class CollectionCheckBoxesInputTest < ActionView::TestCase
       assert_select 'label.checkbox.inline > input'
     end
   end
+
+  test 'input check boxes wrapper class are not included when set to falsey' do
+    swap SimpleForm, include_input_wrapper_class: false do
+      with_input_for @user, :gender, :check_boxes, collection: [:male, :female]
+
+      assert_no_select 'label.checkbox'
+    end
+  end
 end

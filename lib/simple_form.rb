@@ -151,6 +151,10 @@ module SimpleForm
   mattr_accessor :input_class
   @@input_class = nil
 
+  # Defines if an input wrapper class should be included or not
+  mattr_accessor :include_input_wrapper_class
+  @@include_input_wrapper_class = true
+
   ## WRAPPER CONFIGURATION
   # The default wrapper to be used by the FormBuilder.
   mattr_accessor :default_wrapper
