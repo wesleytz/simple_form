@@ -15,14 +15,15 @@ module SimpleForm
 
           rendered_item = yield item, value, text, default_html_options.merge(additional_html_options)
 
+          if SimpleForm.boolean_style == :nested
+            label_options = {}
+            add_default_name_and_id_for_value(text, label_options)
+            label_options['for'] = label_options['id']
+            rendered_item = content_tag(:label, rendered_item, label_options)
+          end
+
           if item_wrapper_tag
             options = { class: item_wrapper_class }
-
-            if item_wrapper_tag.to_s == 'label'
-              label_options = {}
-              add_default_name_and_id_for_value(text, label_options)
-              options['for'] = label_options['id']
-            end
 
             @template_object.content_tag(item_wrapper_tag, rendered_item, options)
           else
